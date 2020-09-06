@@ -33,6 +33,7 @@ lib_network 组件是对网络请求的封装，目的是为不同的业务提�
 lib_image_loader 组件是对图片加载功能的封装，为各业务模块提供统一的图片加载体验，并解耦业务模块对第三方库的依赖。
 
 **技术选型：**
+
 常见的图片加载库有 Volley， Picasso，Glide。
 
 * Volley：Volley是 Google推出的库，但是近些年发展不太好。
