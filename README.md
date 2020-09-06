@@ -41,6 +41,18 @@ lib_image_loader 组件是对图片加载功能的封装，为各业务模块提
 
 因此我们最终选择 Glide 作为我们底层的图片加载框架。
 
+**封装思路：**
+
+创建单例类 ImageLoaderManager，在里面实现各种业务层常用的图片加载方法，包括以下几种：
+
+* 为普通ImageView加载图片
+* 为ViewGroup加载图片 -- 大图加载优化，用RxJava将耗时部分放到IO线程执行，完成后回调主线程设置图片资源
+* 加载圆形图片
+* 为Notification的RemoteViews加载图片
+* ......
+
+有了 ImageLoaderManager 对各个图片加载场景的封装，以后如果还有其它场景，可以继续在这个类里扩展；业务层调用 ImageLoaderManager 完全不会感知底层的图片加载框架，这样以后如果更换性能更好地框架，只需修改 lib_image_loader 组件即可，业务层不需要做任何修改
+
 
 
 
