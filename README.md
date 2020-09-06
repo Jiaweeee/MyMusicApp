@@ -28,3 +28,27 @@ lib_network 组件是对网络请求的封装，目的是为不同的业务提�
 * CommonRequest：封装 get/post/文件上传请求的构建
 * CommonResponse：封装JsonCallback，供UI层获取数据和更新界面；封装OkHttpException，提高定位效率；封装FileCallback，处理文件下载请求并实现下载进度更新
 * OkHttpClient：封装一个单例，用于发送post/get/文件下载请求并做一些通用的设置，例如校验hostname，添加公共请求头，设置超时时间等等，后续可以灵活扩展，通过添加setter方法让业务根据需要设置参数。
+
+### lib_image_loader
+lib_image_loader 组件是对图片加载功能的封装，为各业务模块提供统一的图片加载体验，并解耦业务模块对第三方库的依赖。
+
+**技术选型：**
+常见的图片加载库有 Volley， Picasso，Glide。
+
+* Volley：Volley是 Google推出的库，但是近些年发展不太好。
+* Picasso：Picasso 是非常流行的图片加载框架，对内存的优化非常好，它会绑定Activity的声明周期，当Activity销毁时回收图片内存；而且Picasso支持链式调用，使用很方便，会使代码看上去十分简洁。
+* Glide：Glide 和 Picasso是同一家公司出品，是目前最流行的图片加载库，也得到了Google的推荐。Glide是基于 Picasso的，因此它继承了Picasso所有的优点，并且更加强大。
+
+因此我们最终选择 Glide 作为我们底层的图片加载框架。
+
+
+
+
+
+
+
+
+
+
+
+
