@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'maven'
 
 def pomName = this.getName()
@@ -28,8 +29,30 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation this.rootProject.depsLibs.appcompat
+    //占位主工程android原生库
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.design
+    compileOnly rootProject.depsLibs.recyclerview
+
+    //占位主工程的greenDao类库
+    compileOnly rootProject.depsLibs.greendao
+    //占位主工程的eventbus库
+    compileOnly rootProject.depsLibs.eventbus
+    //占位主工程的rxjava库
+    compileOnly rootProject.depsLibs.rxjava
+
+    //占位主工程自己源码库
+    compileOnly project(':lib_image_loader')
+    compileOnly project(':lib_common_ui')
+    compileOnly project(':lib_share')
+
 }
+
+//greendao {
+//    //其它配置保持默认,有需要再研究
+//    schemaVersion 1 //数据库版本号
+//    daoPackage 'com.imooc.lib_audio.mediaplayer.db' //dao,master类所在包
+//}
 
 uploadArchives{
     repositories{
