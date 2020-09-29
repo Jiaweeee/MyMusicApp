@@ -9,7 +9,7 @@ import android.widget.RemoteViews;
 import com.anjiawei.lib_image_loader.app.BaseImageLoaderStrategy;
 import com.anjiawei.lib_image_loader.app.GlideImageLoaderStrategy;
 
-public class ImageLoader {
+public class ImageLoader implements IImageLoader {
     private BaseImageLoaderStrategy mStrategy;
 
     private ImageLoader() {
@@ -24,18 +24,27 @@ public class ImageLoader {
         return InstanceHolder.sInstance;
     }
 
+    @Override
+    public void setImageLoaderStrategy(BaseImageLoaderStrategy strategy) {
+        mStrategy = strategy;
+    }
+
+    @Override
     public void displayImageForView(ImageView imageView, String url) {
         mStrategy.displayImageForView(imageView, url);
     }
 
+    @Override
     public void displayImageForCircle(ImageView imageView, String url) {
         mStrategy.displayImageForCircle(imageView, url);
     }
 
+    @Override
     public void displayImageForViewGroup(ViewGroup group, String url) {
         mStrategy.displayImageForViewGroup(group, url);
     }
 
+    @Override
     public void displayImageForNotification(Context context, RemoteViews rv,
                                             int id, Notification notification,
                                             int NOTIFICATION_ID, String url) {
