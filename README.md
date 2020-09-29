@@ -51,7 +51,7 @@ lib_image_loader 组件是对图片加载功能的封装，为各业务模块提
 
 **封装思路：**
 
-创建单例类 ImageLoaderManager，在里面实现各种业务层常用的图片加载方法，包括以下几种：
+使用策略模式，定义ImageLoader策略的接口 `BaseImageLoaderStrategy` ，这里定义了一个ImageLoader要实现的功能，主要有以下几个：
 
 * 为普通ImageView加载图片
 * 为ViewGroup加载图片 -- 大图加载优化，用RxJava将耗时部分放到IO线程执行，完成后回调主线程设置图片资源
@@ -59,7 +59,10 @@ lib_image_loader 组件是对图片加载功能的封装，为各业务模块提
 * 为Notification的RemoteViews加载图片
 * ......
 
-有了 ImageLoaderManager 对各个图片加载场景的封装，以后如果还有其它场景，可以继续在这个类里扩展；业务层调用 ImageLoaderManager 完全不会感知底层的图片加载框架，这样以后如果更换性能更好地框架，只需修改 lib_image_loader 组件即可，业务层不需要做任何修改
+由于我们选择的开源框架是Glide，那么就用Glide实现一个类，它实现了前面定义的策略接口。后续如果想要替换成其它的库，只需要用替换的库实现相同的接口即可。
+实际对外提供图片加载能力的是 `ImageLoader`类，它默认使用 `GlideImageLoaderStrategy` 作为加载策略，可以灵活替换，并且提供设置默认策略的接口，用户自己实现加载策略。
+
+这样设计带来的好处就是可扩展性非常好，如果将来要替换成其它的库所做的改动很小，而且业务完全不感知。
 
 
 
