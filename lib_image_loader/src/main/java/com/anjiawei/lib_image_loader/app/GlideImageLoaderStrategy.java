@@ -1,5 +1,6 @@
 package com.anjiawei.lib_image_loader.app;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -35,24 +36,14 @@ import io.reactivex.schedulers.Schedulers;
  * 图片加载类，外界唯一调用类，
  * 支持为 View， notification，appwidget加载图片
  */
-public class ImageLoaderManager {
-    private ImageLoaderManager() {
-    }
-
-    private static class SingletonHolder {
-        private static ImageLoaderManager mInstance = new ImageLoaderManager();
-    }
-
-    public static ImageLoaderManager getInstance() {
-        return SingletonHolder.mInstance;
-    }
-
+public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
     /**
      * 为ImageView 加载图片
      *
      * @param imageView
      * @param url
      */
+    @Override
     public void displayImageForView(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .asBitmap()
@@ -75,6 +66,7 @@ public class ImageLoaderManager {
     /**
      * 为ImageView加载圆形图片
      */
+    @Override
     public void displayImageForCircle(final ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .asBitmap()
@@ -96,12 +88,14 @@ public class ImageLoaderManager {
      * @param group
      * @param url
      */
+    @Override
     public void displayImageForViewGroup(final ViewGroup group, String url) {
         Glide.with(group.getContext())
                 .asBitmap()
                 .load(url)
                 .apply(initCommonRequestOptions())
                 .into(new SimpleTarget<Bitmap>() {
+                    @SuppressLint("CheckResult")
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource,
                                                 @Nullable Transition<? super Bitmap> transition) {
@@ -137,6 +131,7 @@ public class ImageLoaderManager {
      * @param NOTIFICATION_ID
      * @param url
      */
+    @Override
     public void displayImageForNotification(Context context, RemoteViews rv, int id,
                                             Notification notification, int NOTIFICATION_ID, String url) {
         this.displayImageForTarget(context, initNotificationTarget(context, id, rv, notification, NOTIFICATION_ID), url);
