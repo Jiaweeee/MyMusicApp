@@ -57,7 +57,7 @@ lib_image_loader 组件是对图片加载功能的封装，为各业务模块提
 * 为ViewGroup加载图片 -- 大图加载优化，用RxJava将耗时部分放到IO线程执行，完成后回调主线程设置图片资源
 * 加载圆形图片
 * 为Notification的RemoteViews加载图片
-* ......
+* 针对Glide使用Application Context加载出现的内存泄漏问题做了针对性优化（待补充）
 
 由于我们选择的开源框架是Glide，那么就用Glide实现一个类，它实现了前面定义的策略接口。后续如果想要替换成其它的库，只需要用替换的库实现相同的接口即可。
 实际对外提供图片加载能力的是 `ImageLoader`类，它默认使用 `GlideImageLoaderStrategy` 作为加载策略，可以灵活替换，并且提供设置默认策略的接口，用户自己实现加载策略。
