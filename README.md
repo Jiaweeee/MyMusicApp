@@ -33,7 +33,7 @@ lib_network 组件是对网络请求的封装，目的是为不同的业务提�
 一次完整的网络请求主要包含三个部分：请求，响应和发送。因此我们的封装也是按照这三个部分来实现的。
 
 * CommonRequest：封装 get/post/文件上传请求的构建
-* CommonResponse：封装JsonCallback，供UI层获取数据和更新界面；封装OkHttpException，提高定位效率；封装FileCallback，处理文件下载请求并实现下载进度更新
+* CommonResponse：封装JsonCallback，供UI层获取数据和更新界面；封装OkHttpException，提高定位效率；封装FileCallback，处理文件下载请求并实现下载进度更新和断点续传
 * OkHttpClient：封装一个单例，用于发送post/get/文件下载请求并做一些通用的设置，例如校验hostname，添加公共请求头，设置超时时间等等，后续可以灵活扩展，通过添加setter方法让业务根据需要设置参数。
 
 ### lib_image_loader
