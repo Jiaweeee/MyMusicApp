@@ -44,7 +44,7 @@ lib_image_loader 组件是对图片加载功能的封装，为各业务模块提
 常见的图片加载库有 Volley， Picasso，Glide。
 
 * Volley：Volley是 Google推出的库，但是近些年发展不太好。
-* Picasso：Picasso 是非常流行的图片加载框架，对内存的优化非常好，它会绑定Activity的声明周期，当Activity销毁时回收图片内存；而且Picasso支持链式调用，使用很方便，会使代码看上去十分简洁。
+* Picasso：Picasso 是非常流行的图片加载框架，对内存的优化非常好，它会绑定Activity的生命周期，当Activity销毁时回收图片内存；而且Picasso支持链式调用，使用很方便，会使代码看上去十分简洁。
 * Glide：Glide 和 Picasso是同一家公司出品，是目前最流行的图片加载库，也得到了Google的推荐。Glide是基于 Picasso的，因此它继承了Picasso所有的优点，并且更加强大。
 
 因此我们最终选择 Glide 作为我们底层的图片加载框架。
